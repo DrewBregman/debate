@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Debate Nebula - Verify Code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="signin-container">
+        <div class="signin-box">
+            <h1>Verify Your Phone Number</h1>
+            <p>Enter the verification code sent to your phone</p>
+            <input type="text" id="verification-code" class="signin-input" placeholder="Verification code">
+            <button id="verify-code-button" class="signin-button phone-button">Verify Code</button>
+        </div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <!-- Firebase Auth SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <!-- Firebase Firestore SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script src="firebaseConfig.js"></script>
+    <script src="verify.js"></script>
+</body>
+</html>

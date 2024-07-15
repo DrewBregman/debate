@@ -40,6 +40,14 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
+dir-name
+
+__pycache__
+
+venv
+
+functions/lib
+
 # node-waf configuration
 .lock-wscript
 
@@ -69,9 +77,6 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
-
-# Ignore public assets if not necessary
-public/
 
 # Ignore environment-specific configuration files
 .env.local

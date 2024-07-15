@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Debate Nebula - Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            color: #fff;
+        }
+
+        #space {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            animation: rotate 240s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--twinkle-duration) infinite ease-in-out;
+            box-shadow: 0 0 var(--star-size) var(--star-color);
+        }
+
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: pulsate 8s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: var(--base-opacity); }
+            50% { opacity: calc(var(--base-opacity) * 0.3); }
+        }
+
+        @keyframes pulsate {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+        }
+
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(-45deg, #5f91ff, rgba(0, 0, 255, 0));
+            filter: drop-shadow(0 0 6px #699bff);
+            animation: shoot 1s ease-out infinite;
+        }
+
+        .shooting-star::before, .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            right: 0;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(0, 0, 255, 0), #5f91ff, rgba(0, 0, 255, 0));
+            transform: translateX(50%) rotateZ(45deg);
+            border-radius: 100%;
+            animation: shining 2s ease-in-out infinite;
+        }
+
+        .shooting-star::after {
+            transform: translateX(50%) rotateZ(-45deg);
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0) rotate(215deg);
+                opacity: 1;
+                width: 0;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(var(--end-x)) translateY(var(--end-y)) rotate(215deg);
+                opacity: 0;
+                width: 100px;
+            }
+        }
+
+        @keyframes shining {
+            0% {
+                width: 0;
+            }
+            50% {
+                width: 30px;
+            }
+            100% {
+                width: 0;
+            }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .signin-box {
+            background: rgba(15, 15, 31, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            text-decoration: none;
+            background-color: #4a90e2;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .btn svg {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .input-group svg {
+            padding: 12px;
+            width: 20px;
+            height: 20px;
+            min-width: 44px;
+        }
+
+        .input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #fff;
+            padding: 12px 12px 12px 0;
+            font-size: 16px;
+            outline: none;
+            width: calc(100% - 44px);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+                         0 0 20px rgba(255, 255, 255, 0.5),
+                         0 0 30px rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #bbb;
+        }
+
+        .btn:hover {
+            background-color: #357ae8;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .divider span {
+            padding: 0 10px;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        .input-group:focus-within {
+            box-shadow: 0 0 0 2px #4a90e2;
+        }
+
+        .input::placeholder {
+            color: #bbb;
+        }
+
+        #recaptcha-container {
+            margin-bottom: 15px;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .error {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #ff4444;
+        }
+
+        .success {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #00c851;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="space"></div>
+    <div class="container">
+        <div class="signin-box">
+            <h1>Cosmic Debate Nebula</h1>
+            <p>Embark on an intellectual journey through the cosmos</p>
+            <a href="#" id="google-sign-in" class="btn">
+                <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#ffffff" d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/>
+                </svg>
+                Sign in with Google
+            </a>
+            <div class="divider">
+                <span>or</span>
+            </div>
+            <div id="phone-signin-container">
+                <div class="input-group">
+                    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4a90e2" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    <input type="tel" id="phone-number" class="input" placeholder="Enter your phone number (10 digits)">
+                </div>
+                <div id="recaptcha-container"></div>
+                <button id="phone-sign-in" class="btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#ffffff" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                    Send Verification Code
+                </button>
+            </div>
+            <div id="verification-code-container" class="hidden">
+                <div class="input-group">
+                    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4a90e2" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    <input type="text" id="verification-code" class="input" placeholder="Enter verification code">
+                </div>
+                <button id="verify-code" class="btn">
+                    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#ffffff" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                    Verify Code
+                </button>
+            </div>
+            <div id="error-message" class="message error hidden"></div>
+            <div id="success-message" class="message success hidden"></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="firebaseConfig.js"></script>
+    <script src="signin.js"></script>
+    <script>
+       const space = document.getElementById('space');
+        const starCount = 2000;
+        const nebulaCount = 5;
+        const shootingStarInterval = 1500; // New shooting star every 1.5 seconds
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--base-opacity', Math.random() * 0.5 + 0.5);
+            star.style.setProperty('--twinkle-duration', `${Math.random() * 4 + 2}s`);
+            star.style.setProperty('--star-size', `${size * 2}px`);
+            star.style.setProperty('--star-color', `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.2})`);
+            return star;
+        }
+
+        function createNebula() {
+            const nebula = document.createElement('div');
+            nebula.className = 'nebula';
+            const size = Math.random() * 500 + 200;
+            nebula.style.width = `${size}px`;
+            nebula.style.height = `${size}px`;
+            nebula.style.left = `${Math.random() * 100}%`;
+            nebula.style.top = `${Math.random() * 100}%`;
+            const hue = Math.random() * 360;
+            nebula.style.background = `radial-gradient(circle, hsla(${hue}, 100%, 70%, 0.3) 0%, hsla(${hue}, 100%, 70%, 0) 70%)`;
+            return nebula;
+        }
+
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.left = `${Math.random() * 100}%`;
+            shootingStar.style.top = `${Math.random() * 50}%`;
+            const distance = Math.random() * 400 + 300;
+            shootingStar.style.setProperty('--end-x', `${distance}px`);
+            shootingStar.style.setProperty('--end-y', `${distance}px`);
+            space.appendChild(shootingStar);
+            setTimeout(() => shootingStar.remove(), 1000);
+        }
+
+        // Create initial stars and nebulae
+        for (let i = 0; i < starCount; i++) {
+            space.appendChild(createStar());
+        }
+        for (let i = 0; i < nebulaCount; i++) {
+            space.appendChild(createNebula());
+        }
+
+        // Periodically create shooting stars
+        setInterval(createShootingStar, shootingStarInterval);
+
+        // Add parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
+            space.style.transform = `translate(${moveX}px, ${moveY}px) rotate(${space.style.getPropertyValue('--rotation')}deg)`;
+        });
+
+        // Add slow rotation to the entire star field
+        let rotation = 0;
+        function rotateStars() {
+            rotation += 0.01;
+            space.style.setProperty('--rotation', rotation);
+            requestAnimationFrame(rotateStars);
+        }
+        rotateStars();
+    </script>
+</body>
+</html>
