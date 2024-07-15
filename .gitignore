@@ -40,6 +40,14 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
+dir-name
+
+__pycache__
+
+venv
+
+functions/lib
+
 # node-waf configuration
 .lock-wscript
 
